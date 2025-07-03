@@ -1,0 +1,18 @@
+[06-Jul-2024 00:27:43 America/Chicago] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: string / string in /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/config.php:69
+Stack trace:
+#0 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/vendor/cksource/ckfinder/src/CKSource/CKFinder/Config.php(60): require()
+#1 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/vendor/cksource/ckfinder/src/CKSource/CKFinder/CKFinder.php(95): CKSource\CKFinder\Config->__construct(Array)
+#2 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/vendor/pimple/pimple/src/Pimple/Container.php(122): CKSource\CKFinder\CKFinder->CKSource\CKFinder\{closure}(Object(CKSource\CKFinder\CKFinder))
+#3 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/vendor/cksource/ckfinder/src/CKSource/CKFinder/CKFinder.php(195): Pimple\Container->offsetGet('config')
+#4 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/connector.php(18): CKSource\CKFinder\CKFinder->__construct('/home1/journalc...')
+#5 {main}
+  thrown in /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/config.php on line 69
+[06-Jul-2024 00:27:54 America/Chicago] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: string / string in /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/config.php:69
+Stack trace:
+#0 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/vendor/cksource/ckfinder/src/CKSource/CKFinder/Config.php(60): require()
+#1 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/vendor/cksource/ckfinder/src/CKSource/CKFinder/CKFinder.php(95): CKSource\CKFinder\Config->__construct(Array)
+#2 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/vendor/pimple/pimple/src/Pimple/Container.php(122): CKSource\CKFinder\CKFinder->CKSource\CKFinder\{closure}(Object(CKSource\CKFinder\CKFinder))
+#3 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/vendor/cksource/ckfinder/src/CKSource/CKFinder/CKFinder.php(195): Pimple\Container->offsetGet('config')
+#4 /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/core/connector/php/connector.php(18): CKSource\CKFinder\CKFinder->__construct('/home1/journalc...')
+#5 {main}
+  thrown in /home1/journalc/public_html/admin_assets/ckeditor/ckfinder/config.php on line 69

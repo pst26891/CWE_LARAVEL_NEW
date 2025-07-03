@@ -1,0 +1,1 @@
+ALTER TABLE `settings` CHANGE `about_journal` `about_journal` LONGTEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;

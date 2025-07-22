@@ -820,3 +820,57 @@ pre{border:1px solid #eee;font-size:1em;line-height:1.8;margin:15px 0;max-width:
 .help-btn:hover {
     background-color: #f0f0f0;
 }
+.form-section { margin-bottom: 20px; }
+    .co-author-row input { margin-bottom: 10px; }
+    .icon-buttons { display: flex; gap: 5px; align-items: center; }
+    .custom-upload-box {
+      border: 2px dashed #ccc;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      color: #888;
+    }
+    .remove_btn{
+        border: 1px solid #9b8d8d;
+    border-radius: 25px;
+    height: 24px;
+    margin: 10px;
+    }
+
+    #upload-area.dz-clickable {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.dz-preview {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  border: 1px solid #e1e1e1;
+  padding: 10px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.dz-image img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.dz-remove {
+  margin-left: auto;
+  cursor: pointer;
+  color: red;
+}
+
+.dropzone{
+    border: 2px dotted rgba(0, 0, 0, .3) !important;
+}
+.sidebar-left .sidebar-widget ul li a{color:#7e858b !important;line-height:1.8;}
+
+.sidebar-widget ul li{list-style: circle !important;}

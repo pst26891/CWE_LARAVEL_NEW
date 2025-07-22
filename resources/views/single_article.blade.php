@@ -80,7 +80,7 @@
             @endif
 
             @if($article->abstract)
-            <p><span><strong>Abstract</strong> {!! $article->abstract !!}</span></p>
+            <p id="abstract"><span><strong>Abstract</strong> {!! $article->abstract !!}</span></p>
             @endif
 
             @if($article->keyword)
@@ -198,7 +198,7 @@
     </div> <!-- End Other -->
 
     <!-- Introduction -->
-    <div class="myrow">
+    <div class="myrow" id="introduction">
         <h2>Introduction: </h2>
         <div class="introduction">{!! $article->description !!}</div>
 
@@ -336,6 +336,30 @@
         document.execCommand("copy");
         alert("Copied the link: " + copyText.value);
     }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const OFFSET = 200; // adjust as needed
+    const links = document.querySelectorAll('a[href^="#"]');
+
+    links.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                e.preventDefault();
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - OFFSET;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
 </script>
+
 
 @endsection

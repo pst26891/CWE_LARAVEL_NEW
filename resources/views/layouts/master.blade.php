@@ -79,7 +79,6 @@
     <script src="{{ url('/')}}/assets/js/vendor/jquery.ticker.js"></script>
     <script src="{{ url('/')}}/assets/js/vendor/jquery.vticker-min.js"></script>
     <script src="{{ url('/')}}/assets/js/vendor/jquery.scrollUp.min.js"></script>
-    <script src="{{ url('/')}}/assets/js/vendor/jquery.nice-select.min.js"></script>
     <script src="{{ url('/')}}/assets/js/vendor/jquery.sticky.js"></script>
     <script src="{{ url('/')}}/assets/js/vendor/perfect-scrollbar.js"></script>
     <script src="{{ url('/')}}/assets/js/vendor/waypoints.min.js"></script>

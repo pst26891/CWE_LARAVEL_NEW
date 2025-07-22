@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     include_route_files(__DIR__ . '/admin/');
 
 });
+Route::get('/login', [LoginController::class, 'index']);
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/abstract/{articleId}', [ArticleController::class, 'viewAbstract']);

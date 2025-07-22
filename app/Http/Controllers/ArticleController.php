@@ -17,6 +17,8 @@ class ArticleController extends MyController
         $data['article'] = Article::with(['volumeInfo', 'issue', 'author','affiliation'])->where('url','=',$articleSlug)->firstOrFail();
         $data['leftWidgets'] = Widget::where('status', 0)->where('layout_type', 1)->orderBy('order')->get();
         $data['rightWidgets'] = Widget::where('status', 0)->where('layout_type', 2)->orderBy('order')->get();
+        $data['isArticlePage'] = true;
+
         return view('single_article', $data);
     }
 

@@ -4,13 +4,20 @@
         <div class="mobile_menu d-lg-none d-block"></div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-3 col-md-4">
                     <div class="header-logo d-none d-lg-block">
-                        <a href="{{ url('/') }}">
-                            {{-- Display the logo if it exists, otherwise show a default image --}}
-                            <img class="logo-img d-inline" src="{{url('uploads').'/'.$setting->logo}}" alt="">
-
-                        </a>
+                        <div class="only-logo">
+                            <a href="{{ url('/') }}">
+                                {{-- Display the logo if it exists, otherwise show a default image --}}
+                                <img class="logo-img d-inline" src="{{url('uploads').'/'.$setting->logo}}" alt="">
+                            </a>
+                        </div>
+                        <div class="logo-headline">
+                                <a href="{{ url('/') }}" title="cwe">
+                                        <h1 class="site-title">Current World Environment</h1>
+                                </a>
+                                <h2 class="site-description">An International Research Journal of Environmental Science</h2>
+                            </div>
                     </div>
                     <div class="logo-tablet d-md-inline d-lg-none d-none">
                         <a href="index.html">
@@ -23,7 +30,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-10 col-md-9 main-header-navigation">
+                <div class="col-lg-9 col-md-8 main-header-navigation">
                     <!-- Main-menu -->
                     <div class="main-nav text-left float-lg-left float-md-right">
                         <ul class="mobi-menu d-none menu-3-columns" id="navigation">

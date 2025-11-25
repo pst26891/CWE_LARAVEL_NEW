@@ -4,7 +4,7 @@
 
 @section('content')
 @php $vurl = "vol".$article->volumeInfo->alias."no".$article->issue->alias; @endphp
-<div class="col-lg-9 col-md-8 order-2 order-md-2" style="text-align: justify;">
+<div class="col-lg-8 col-md-7 order-2 order-md-2" style="text-align: justify;">
 
     <div class="entry-header entry-header-1 mb-30 mt-50">
         <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span class="post-cat bg-success color-white">{{$article->volumeInfo->name}} & {{$article->issue->name}}</span></a></div>
@@ -210,32 +210,38 @@
 
     </div>
 </div>
-<div class="col-lg-1 col-md-1 order-3 order-md-3 sticky-sidebar">
+<div class="col-lg-2 col-md-2 order-3 order-md-3 sticky-sidebar">
     <div class="sidebar-icons">
 
+        <div class="icon-box" onclick="openSharePopup('Plum')">
+            ` <img src="{{ url('/')}}/assets/imgs/plum.png" alt="Plum Icon" class="icon-img">
+            <div class="icon-label">Plum</div>
+        </div>
+
         <div class="icon-box" onclick="openSharePopup('Share')">
-            <i class="fas fa-share-alt"></i>
+            <img src="{{ url('/')}}/assets/imgs/share.png" alt="Share Icon" class="icon-img">
             <div class="icon-label">Share</div>
         </div>
 
         <div class="icon-box" onclick="openSharePopup('View')">
-            <i class="fas fa-eye"></i>
+            <img src="{{ url('/')}}/assets/imgs/views.png" alt="View Icon" class="icon-img">
             <div class="icon-label">View</div>
         </div>
 
         <div class="icon-box" onclick="openSharePopup('Download')">
-            <i class="fas fa-download"></i>
+            <img src="{{ url('/')}}/assets/imgs/downloads.png" alt="Download Icon" class="icon-img">
             <div class="icon-label">Download</div>
         </div>
 
-        <div class="icon-box" onclick="openSharePopup('Help')">
-            <i class="fas fa-exclamation"></i>
-            <div class="icon-label">Help</div>
-        </div>
         <div class="icon-box" onclick="openSharePopup('Cite')">
-            <i class="fas fa-quote-right"></i>
+            <img src="{{ url('/')}}/assets/imgs/cite.png" alt="Cite Icon" class="icon-img">
             <div class="icon-label">Cite</div>
         </div>
+
+        <div class="icon-box" onclick="openSharePopup('Help')">
+            <img src="{{ url('/')}}/assets/imgs/help.png" alt="Help Icon" class="icon-img">
+            <div class="icon-label">Help</div>
+        </div>`
 
     </div>
 
@@ -337,28 +343,28 @@
         alert("Copied the link: " + copyText.value);
     }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const OFFSET = 200; // adjust as needed
-    const links = document.querySelectorAll('a[href^="#"]');
+    document.addEventListener('DOMContentLoaded', function() {
+        const OFFSET = 200; // adjust as needed
+        const links = document.querySelectorAll('a[href^="#"]');
 
-    links.forEach(link => {
-        link.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
 
-            if (targetElement) {
-                e.preventDefault();
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.scrollY - OFFSET;
+                if (targetElement) {
+                    e.preventDefault();
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - OFFSET;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     });
-});
 </script>
 
 

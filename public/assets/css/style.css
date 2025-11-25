@@ -228,7 +228,7 @@ transition:visibility 0s linear .3s,transform .3s ease,opacity .3s ease,-webkit-
 .main-search-form .search-switch{position:absolute;right:30px;top:50%;transform:translateY(-50%);margin-top:-3px;line-height:1;border-left:1px solid #dfe0e6;padding-left:15px;font-size:14px;}
 
 /*Main header*/
-.main-header .main-nav ul li a{position:relative;color:#4d4d4d;font-weight:700;padding:0;display:block;font-size:14px;-webkit-transition:all .2s ease-out 0s;-moz-transition:all .2s ease-out 0s;-ms-transition:all .2s ease-out 0s;-o-transition:all .2s ease-out 0s;transition:all .2s ease-out 0s;font-family:'Nunito',sans-serif;line-height:1.5;line-height:60px;}
+.main-header .main-nav ul li a{position:relative;color:#4d4d4d;font-weight:700;padding:0;display:block;font-size:12px;-webkit-transition:all .2s ease-out 0s;-moz-transition:all .2s ease-out 0s;-ms-transition:all .2s ease-out 0s;-o-transition:all .2s ease-out 0s;transition:all .2s ease-out 0s;font-family:'Nunito',sans-serif;line-height:1.5;line-height:60px;}
 .main-header .main-nav ul li > a::after{content:"";width:0;height:2px;position:absolute;left:50%;top:-1px;opacity:0.5;transform:translateX(-50%);}
 .main-header .main-nav ul li.mega-menu-item a::after,
 .main-header .main-nav ul li ul a::after{content:none;}
@@ -672,7 +672,6 @@ pre{border:1px solid #eee;font-size:1em;line-height:1.8;margin:15px 0;max-width:
 .sidebar-icons {
     background-color: #ffffff;
     padding: 20px 10px;
-    width: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -681,12 +680,13 @@ pre{border:1px solid #eee;font-size:1em;line-height:1.8;margin:15px 0;max-width:
 }
 
 .sidebar-icons .icon-box {
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     text-align: center;
     color: #1a1a1a;
     font-family: Arial, sans-serif;
     font-size: 12px;
     cursor: pointer;
+    width:80px
 }
 
 .sidebar-icons .icon-box i {
@@ -871,6 +871,37 @@ pre{border:1px solid #eee;font-size:1em;line-height:1.8;margin:15px 0;max-width:
 .dropzone{
     border: 2px dotted rgba(0, 0, 0, .3) !important;
 }
-.sidebar-left .sidebar-widget ul li a{color:#7e858b !important;line-height:1.8;}
 
 .sidebar-widget ul li{list-style: circle !important;}
+
+.header-logo .site-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e84747;
+    font-family: 'Francois One', Tahoma, Arial;
+}
+.header-logo .site-description {
+    margin-top: 11px;
+    color: #057203;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.logo-headline {
+    float: left;
+    padding: 5px 0px 0px 5px;
+    max-width: 84%;
+    text-align: left;
+}
+
+.only-logo {
+    float: left;
+    width: 45px;
+}
+.sidebar-right ul li{list-style: none !important;
+
+}
+.header-logo a:hover .site-title {
+	color: #057203;
+	text-decoration: none;
+}

@@ -19,9 +19,11 @@ use Route;
 
 class HomeController extends MyController
 {
+    private $__perPage = 3;
     public function __construct()
     {
         ini_set('max_execution_time', 300);
+       
     }
 
     function index()
@@ -60,6 +62,9 @@ class HomeController extends MyController
         $data['sidebarNav'] = Page::where('parent', '=', $data['pageContent']->parent)->orderBy('title', 'ASC')->get();
         $data['comingIssue'] = Issue::with('volume')->where('coming', '=', '1')->first();
         $data['currentIssue'] = Issue::with('volume')->where('current', '=', '1')->first();
+
+        $data['mostViewed'] = Article::with(['volume', 'issue', 'author'])->orderByDesc('total_view')->paginate($this->__perPage);
+        $data['mostDownloaded'] = Article::with(['volume', 'issue', 'author'])->orderByDesc('total_download')->paginate($this->__perPage);
         // $data['editorial_categories'] = DB::table('editorial_categories')
         //     ->where(['status' => 'active'])
         //     ->orderBy('ord', 'ASC')->get();

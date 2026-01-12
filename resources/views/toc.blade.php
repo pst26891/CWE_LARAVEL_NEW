@@ -87,7 +87,7 @@
         <div class="col-lg-2  col-md-2 sidebar-right">
             <!--Post aside style 1-->
             @foreach($rightWidgets as $widget)
-            <div class="sidebar-widget widget_newsletter border-radius-10 p-20 bg-white mb-30" style="text-align:center">
+            <div class="sidebar-widget widget_newsletter border-radius-10  bg-white mb-30" style="text-align:center">
                 <div class="widget-header widget-header-style-1 position-relative mb-15">
                     <h5 class="widget-title">{{$widget->name}}</h5>
                 </div>

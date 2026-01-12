@@ -127,7 +127,7 @@ button.subscribe:hover{background:#1d55c1;color:#fff;}
 .text-light{color:#f8f9fa!important;}
 .text-dark{color:#343a40!important;}
 .text-muted,
-.text-muted a{color:#9babb6!important;}
+.text-muted a{color:#575f64 !important;}
 .text-white{color:#fff!important;}
 .text-grey{color:#889097!important;}
 .bg-primary{background-color:#3FA9F5!important;}

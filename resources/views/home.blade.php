@@ -36,7 +36,7 @@
 
             @foreach($mostLatest as $article)
             @php $vurl = "vol".$article->volumeInfo->alias."no".$article->issue->alias; @endphp
-            <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
+            <article class="p-10 background-white border-radius-10 mb-10 wow fadeIn animated">
                 <div class="d-flex">
 
                     <div class="post-content media-body">
@@ -73,6 +73,12 @@
                 </div>
             </article>
             @endforeach
+            <div class="col-md-12 text-right">
+                <h6 class="font-medium pr-15">
+                    <a class="text-muted font-small" href="{{url('/')}}/page/issues/current-issue-toc">Read More</a>
+                </h6>
+            </div>
+            
 
             @foreach($mostViewed as $article)
             @php $vurl = "vol".$article->volumeInfo->alias."no".$article->issue->alias; @endphp
@@ -114,6 +120,12 @@
                 </div>
             </article>
             @endforeach
+             <div class="col-md-12 text-right">
+                <h6 class="font-medium pr-15">
+                    <a class="text-muted font-small" href="{{url('/')}}/most-read">Read More</a>
+                </h6>
+            </div>
+            
 
             @foreach($mostDownloaded as $article)
             @php $vurl = "vol".$article->volumeInfo->alias."no".$article->issue->alias; @endphp
@@ -155,13 +167,18 @@
                 </div>
             </article>
             @endforeach
+            <div class="col-md-12 text-right">
+                <h6 class="font-medium pr-15">
+                    <a class="text-muted font-small" href="{{url('/')}}/most-downloads">Read More</a>
+                </h6>
+            </div>
 
 
         </div>
         <div class="col-lg-4 col-md-12 sidebar-right">
             <!--Post aside style 1-->
             @foreach($rightWidgets as $widget)
-            <div class="sidebar-widget widget_newsletter border-radius-10 p-20 bg-white mb-30" style="text-align:center">
+            <div class="sidebar-widget widget_newsletter border-radius-10 bg-white mb-30" style="text-align:center">
                 <div class="widget-header widget-header-style-1 position-relative mb-15">
                     <h5 class="widget-title">{{$widget->name}}</h5>
                 </div>

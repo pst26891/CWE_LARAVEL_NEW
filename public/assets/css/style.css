@@ -905,3 +905,16 @@ pre{border:1px solid #eee;font-size:1em;line-height:1.8;margin:15px 0;max-width:
 	color: #057203;
 	text-decoration: none;
 }
+
+.widget-header .widget-title {
+    position: relative;
+    z-index: 2;
+    background-color: #d35353 !important;
+    color: #fff !important;
+    font-size: 15px;
+    padding: 4px;
+}
+
+.pagination-area ul li{
+    list-style: none !important;
+}

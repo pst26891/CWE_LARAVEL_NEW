@@ -19,6 +19,7 @@ class MenuItem extends Model
         'target',
         'menu_id',
         'depth',
+        'icons',
     ];
 
     public $timestamps = true;

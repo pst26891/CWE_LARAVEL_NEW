@@ -9,7 +9,8 @@
      <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicons.png">
+
     <!-- NewsViral CSS  -->
     <link rel="stylesheet" href="{{ url('/')}}/assets/css/style.css">
     <link rel="stylesheet" href="{{ url('/')}}/assets/css/widgets.css">

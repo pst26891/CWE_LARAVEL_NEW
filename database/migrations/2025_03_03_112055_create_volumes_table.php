@@ -7,16 +7,26 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('volumes', function (Blueprint $table) {
-            $table->id();
-            $table->string('alias', 300);
-            $table->string('name', 300);
-            $table->tinyInteger('status')->comment('0:active,1:Inactive');
-            $table->timestamps();
-            $table->integer('created_by')->nullable();
+       CREATE TABLE volumes (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 
-            
-        });
+    alias VARCHAR(150) NOT NULL,
+    name VARCHAR(150) NOT NULL,
+
+    status TINYINT(1) NOT NULL DEFAULT 1 COMMENT '1:active,0:inactive',
+
+    created_by BIGINT UNSIGNED DEFAULT NULL,
+
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+
+    -- Indexes
+    UNIQUE INDEX uniq_alias (alias),
+    INDEX idx_status (status)
+
+) ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
     }
 
     public function down()

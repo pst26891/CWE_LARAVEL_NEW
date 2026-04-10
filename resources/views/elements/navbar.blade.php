@@ -6,18 +6,19 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4">
                     <div class="header-logo d-none d-lg-block">
-                        <div class="only-logo">
+                         <img class="logo-img d-inline" src="{{url('uploads').'/'.$setting->logo}}" alt="">
+                        <!-- <div class="only-logo">
                             <a href="{{ url('/') }}">
                                 {{-- Display the logo if it exists, otherwise show a default image --}}
                                 <img class="logo-img d-inline" src="{{url('uploads').'/'.$setting->logo}}" alt="">
                             </a>
                         </div>
                         <div class="logo-headline">
-                                <a href="{{ url('/') }}" title="cwe">
-                                        <h1 class="site-title">Current World Environment</h1>
-                                </a>
-                                <h2 class="site-description">An International Research Journal of Environmental Science</h2>
-                            </div>
+                            <a href="{{ url('/') }}" title="cwe">
+                                <h1 class="site-title">Current World Environment</h1>
+                            </a>
+                            <h2 class="site-description">An International Research Journal of Environmental Science</h2>
+                        </div> -->
                     </div>
                     <div class="logo-tablet d-md-inline d-lg-none d-none">
                         <a href="index.html">
@@ -34,19 +35,19 @@
                     <!-- Main-menu -->
                     <div class="main-nav text-left float-lg-left float-md-right">
                         <ul class="mobi-menu d-none menu-3-columns" id="navigation">
-                             @foreach($topNavFrontItems as $menu)
-                            <li class="cat-item cat-item-2"><a href="{{ url($menu->slug) }}">{{ $menu->title }}</a></li>  
+                            @foreach($topNavFrontItems as $menu)
+                            <li class="cat-item cat-item-2"><a href="{{ url($menu->slug) }}">{{ $menu->title }}</a></li>
                             @endforeach
                         </ul>
 
                         <nav>
                             <ul class="main-menu d-none d-lg-inline">
-                              <li >
-                                    <a href="{{'/'}}"><span class="mr-15">
-                                    <ion-icon name="home-outline"></ion-icon>
+                                <li>
+                                    <a href="{{'/'}}"><span class="">
+                                            <ion-icon name="home-outline"></ion-icon>
                                         </span>Home</a>
                                 </li>
-                                
+
                                 {{-- Loop through the top navigation items --}}
                                 @foreach($topNavFrontItems as $menu)
                                 @php
@@ -60,8 +61,8 @@
                                 {{-- 3-level menu (Mega menu style) --}}
                                 <li class="mega-menu-item">
                                     <a href="{{ url($menu->slug) }}" target="{{ $menu->target == 0 ? '' : $menu->target }}">
-                                        <span class="mr-15">
-                                            <ion-icon name="desktop-outline"></ion-icon>
+                                        <span class="">
+                                            <ion-icon name="{{ $menu->icons ? $menu->icons : 'desktop-outline' }}"></ion-icon>
                                         </span>{{ $menu->title }}
                                     </a>
                                     <div class="sub-mega-menu sub-menu-list row text-muted font-small">
@@ -73,18 +74,18 @@
                                                 <a href="{{url('page')}}/{{$menu->slug}}/{{$grand->slug}}" target="{{ $grand->target == 0 ? '' : $grand->target }}">
                                                     {{ $grand->title }}
                                                 </a>
-                                            </li> 
+                                            </li>
                                             @endforeach
                                         </ul>
                                         @endforeach
-                                      
+
                                     </div>
                                 </li>
                                 @elseif($hasChildren)
                                 {{-- 2-level menu --}}
                                 <li class="menu-item-has-children">
                                     <a href="{{ url($menu->slug) }}" target="{{ $menu->target == 0 ? '' : $menu->target }}">
-                                        <span class="mr-15">
+                                        <span class="">
                                             <ion-icon name="home-outline"></ion-icon>
                                         </span>{{ $menu->title }}
                                     </a>
@@ -103,7 +104,7 @@
                                 @if(!empty($menu->slug))
                                 <li>
                                     <a href="{{ url($menu->slug) }}" target="{{ $menu->target == 0 ? '' : $menu->target }}">
-                                        <span class="mr-15">
+                                        <span class="">
                                             <ion-icon name="link-outline"></ion-icon>
                                         </span>{{ $menu->title }}
                                     </a>
@@ -115,7 +116,7 @@
                                 {{-- Static Contact item --}}
                                 <li>
                                     <a href="{{ url('contact') }}">
-                                        <span class="mr-15"><ion-icon name="mail-unread-outline"></ion-icon></span>
+                                        <span class=""><ion-icon name="mail-unread-outline"></ion-icon></span>
                                         Contact
                                     </a>
                                 </li>
@@ -125,10 +126,11 @@
 
                     </div>
                     <!-- Search -->
-                     
+
                     <form action="{{ url('/')}}/search/articles" method="get" class="search-form d-lg-inline float-right position-relative mr-30 d-none">
-                        <input type="text" class="search_field" placeholder="Search" value="" name="search">
-                        <span class="search-icon"><i class="ti-search mr-5"></i></span>
+                        <input type="text" class="search_field" placeholder="Search" value="" name="search" minlength="3"
+                            maxlength="100" required>
+                        <span class="search-icon"><i class="ti-search "></i></span>
                     </form>
                     <!-- Off canvas -->
                     <div class="off-canvas-toggle-cover">

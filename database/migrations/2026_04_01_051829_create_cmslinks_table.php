@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table) {
-            $table->id();
+        Schema::create('cmslinks', function (Blueprint $table) {
+            $table->id('link_id');
 
             $table->unsignedBigInteger('parent')->default(0);
             $table->integer('cat')->default(0);
@@ -24,8 +24,8 @@ return new class extends Migration
 
             $table->string('image')->nullable();
 
-            $table->string('title');
-            $table->longText('description')->nullable();
+            $table->string('heading');
+            $table->longText('content')->nullable();
 
             $table->boolean('status')->default(1);
             $table->integer('position')->default(0);
@@ -37,16 +37,11 @@ return new class extends Migration
             $table->string('page_type')->nullable();
             $table->string('template')->nullable();
 
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-
             $table->timestamps();
-            $table->softDeletes();
 
             $table->index('parent');
             $table->index('cat');
             $table->index(['status', 'position']);
-            $table->index('url');
         });
     }
 
@@ -55,6 +50,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('cmslinks');
     }
 };

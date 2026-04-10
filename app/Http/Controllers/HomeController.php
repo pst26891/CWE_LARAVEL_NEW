@@ -36,7 +36,13 @@ class HomeController extends MyController
         $data['mostViewed'] = Article::with(['volume', 'issue', 'author'])->orderByDesc('total_view')->take(5)->get();
         $data['mostDownloaded'] = Article::with(['volume', 'issue', 'author'])->orderByDesc('total_download')->take(5)->get();
         $data['mostLatest'] = Article::with(['volume', 'issue', 'author'])->where('status', 1)->orderByDesc('id')->take(5)->get();
-
+       
+        // Generate two random numbers
+        $a = rand(1, 9);
+        $b = rand(1, 9);
+        session(['simple_captcha' => $a + $b]);
+        $data['captcha'] = $a . ' + ' . $b . ' = ?';
+        
         return view('home', $data);
     }
 
@@ -55,6 +61,7 @@ class HomeController extends MyController
         $data['captcha'] = $a . ' + ' . $b . ' = ?';
 
         $data['pageContent'] = Page::where('url', '=', $slug)->first();
+
         $data['setting'] = Setting::findOrFail(1);
         $data['leftWidgets'] = Widget::where('status', 0)->where('layout_type', 1)->orderBy('order')->get();
         $data['rightWidgets'] = Widget::where('status', 0)->where('layout_type', 2)->orderBy('order')->get();

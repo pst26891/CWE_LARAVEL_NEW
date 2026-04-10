@@ -35,15 +35,16 @@
             <li class="cat-item" ><a href="#abstract">Abstract</a></li>
             <li class="cat-item" ><a href="#introduction">Introduction</a></li>
             <li class="cat-item" ><a href="#materials-methods">Materials and Methods</a></li>
-            <li class="cat-item" ><a href="#results-discussion">Results and Discussion</a></li>
+            <li class="cat-item" ><a href="#results">Results</a></li>
+            <li class="cat-item" ><a href="#discussion">Discussion</a></li>
             <li class="cat-item" ><a href="#conclusions">Conclusions</a></li>
+            <li class="cat-item" ><a href="#acknowledgement">Acknowledgement</a></li>
             <li class="cat-item" ><a href="#funding-sources">Funding Sources</a></li>
-            <li class="cat-item" ><a href="#conflicts-interest">Conflicts of Interest</a></li>
+            <li class="cat-item" ><a href="#conflicts-interest">Conflict of Interest</a></li>
             <li class="cat-item" ><a href="#authors-contribution">Authors’ Contribution</a></li>
-            <li class="cat-item" ><a href="#data-availability">Data Availability</a></li>
+            <li class="cat-item" ><a href="#data-availability">Data Availability Statement</a></li>
             <li class="cat-item" ><a href="#ethics-statement">Ethics Statement</a></li>
             <li class="cat-item" ><a href="#informed-consent">Informed Consent Statement</a></li>
-            <li class="cat-item" ><a href="#references">References</a></li>
         </ul>
     </div>
      

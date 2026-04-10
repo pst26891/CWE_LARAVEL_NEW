@@ -23,7 +23,7 @@ class ViewServiceProvider extends ServiceProvider
             $this->enrichMenuTree($topNavFrontItems);
 
             // Footer Navigation
-            $fooNav = Menu::where('title', 'Footer_new')->first();
+            $fooNav = Menu::where('title', 'Footer')->first();
             $fooNavItems = $this->decodeMenuContent($fooNav);
             $this->enrichMenuTree($fooNavItems);
 
@@ -31,42 +31,42 @@ class ViewServiceProvider extends ServiceProvider
             // $routeArray = app('request')->route()->getAction();
             // $controllerAction = class_basename($routeArray['controller']);
             // list($controller, $action) = explode('@', $controllerAction);
-            
-$route = app('request')->route();
-$meta = null; // Default
 
-if ($route && $route->getActionName()) {
-    $actionName = $route->getActionName();
+            $route = app('request')->route();
+            $meta = null; // Default
 
-    if (strpos($actionName, '@') !== false) {
-        list($controller, $action) = explode('@', class_basename($actionName));
+            if ($route && $route->getActionName()) {
+                $actionName = $route->getActionName();
 
-        if ($controller === 'HomeController' && $action === 'showPage') {
-            $meta = DB::table('pages')->where('url', request()->segment(1))->first();
-        } elseif ($controller === 'HomeController' && $action === 'showChiled') {
-            $meta = DB::table('pages')->where('url', request()->segment(3))->first();
-        } elseif ($controller === 'HomeController' && $action === 'index') {
-            $meta = DB::table('pages')->where('url', 'home')->first();
-        } elseif ($controller === 'ArticleController' && $action === 'viewArticle') {
-            $meta = Article::with('author', 'volume', 'issue')
-                        ->where('url', request()->segment(2))->first();
-        } else {
-            $meta = DB::table('pages')->where('url', 'home')->first();
-        }
-    }
-}
+                if (strpos($actionName, '@') !== false) {
+                    list($controller, $action) = explode('@', class_basename($actionName));
 
-if (!$meta) {
-    // Fallback to home if no metadata found
-    $meta = DB::table('pages')->where('url', 'home')->first();
-}
+                    if ($controller === 'HomeController' && $action === 'showPage') {
+                        $meta = DB::table('pages')->where('url', request()->segment(1))->first();
+                    } elseif ($controller === 'HomeController' && $action === 'showChiled') {
+                        $meta = DB::table('pages')->where('url', request()->segment(3))->first();
+                    } elseif ($controller === 'HomeController' && $action === 'index') {
+                        $meta = DB::table('pages')->where('url', 'home')->first();
+                    } elseif ($controller === 'ArticleController' && $action === 'viewArticle') {
+                        $meta = Article::with('author', 'volume', 'issue')
+                            ->where('url', request()->segment(2))->first();
+                    } else {
+                        $meta = DB::table('pages')->where('url', 'home')->first();
+                    }
+                }
+            }
+
+            if (!$meta) {
+                // Fallback to home if no metadata found
+                $meta = DB::table('pages')->where('url', 'home')->first();
+            }
             $settings = Setting::first();
 
             // Share with views
             $view->with('topNavFrontItems', $topNavFrontItems)
-                 ->with('fooNavItems', $fooNavItems)
-                 ->with('meta', $meta)
-                 ->with('setting', $settings);
+                ->with('fooNavItems', $fooNavItems)
+                ->with('meta', $meta)
+                ->with('setting', $settings);
         });
     }
 
@@ -74,34 +74,34 @@ if (!$meta) {
      * Decode the stored JSON content into an array of stdClass menu item objects.
      * Returns an empty array if content is missing or invalid.
      */
-protected function decodeMenuContent($menu)
-{
-    if (empty($menu) || empty($menu->content)) {
-        return [];
-    }
-
-    $data = is_string($menu->content)
-        ? json_decode($menu->content)
-        : $menu->content;
-
-    // Case: content is a single object
-    if (is_object($data)) {
-        return [$data];
-    }
-
-    // Case: content is a wrapped array (e.g., [[{...}, {...}]])
-    if (is_array($data)) {
-        // Case: outer array has a nested array as its first element
-        if (isset($data[0]) && is_array($data[0])) {
-            return $data[0]; // ✅ Return the full inner array (not just one item)
+    protected function decodeMenuContent($menu)
+    {
+        if (empty($menu) || empty($menu->content)) {
+            return [];
         }
 
-        // Case: already a flat array of menu items
-        return $data;
-    }
+        $data = is_string($menu->content)
+            ? json_decode($menu->content)
+            : $menu->content;
 
-    return [];
-}
+        // Case: content is a single object
+        if (is_object($data)) {
+            return [$data];
+        }
+
+        // Case: content is a wrapped array (e.g., [[{...}, {...}]])
+        if (is_array($data)) {
+            // Case: outer array has a nested array as its first element
+            if (isset($data[0]) && is_array($data[0])) {
+                return $data[0]; // ✅ Return the full inner array (not just one item)
+            }
+
+            // Case: already a flat array of menu items
+            return $data;
+        }
+
+        return [];
+    }
 
 
     /**
@@ -112,6 +112,7 @@ protected function decodeMenuContent($menu)
     {
         foreach ($itemsFront as &$itemFront) {
             if (!is_object($itemFront) || !isset($itemFront->id)) {
+               
                 // Ensure slug, target, and title exist to avoid undefined property errors elsewhere
                 if (is_object($itemFront)) {
                     if (!isset($itemFront->slug)) {
@@ -122,6 +123,9 @@ protected function decodeMenuContent($menu)
                     }
                     if (!isset($itemFront->title)) {
                         $itemFront->title = '';
+                    }
+                    if (!isset($itemFront->icons)) {
+                        $itemFront->icons = '';
                     }
                 }
                 continue;
@@ -135,11 +139,13 @@ protected function decodeMenuContent($menu)
                 $itemFront->slug   = $model->slug;
                 $itemFront->target = $model->target;
                 $itemFront->type   = $model->type;
+                $itemFront->icons   = $model->icons;
             } else {
                 // Set default values if model not found
                 $itemFront->slug = $itemFront->slug ?? '';
                 $itemFront->target = $itemFront->target ?? '';
                 $itemFront->title = $itemFront->title ?? '';
+                $itemFront->icons = $itemFront->icons ?? '';
             }
 
             // Normalize children property
@@ -157,6 +163,8 @@ protected function decodeMenuContent($menu)
                 $itemFront->children = $children;
             }
         }
+
+        
     }
 
     public function register()

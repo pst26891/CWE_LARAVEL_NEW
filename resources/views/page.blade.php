@@ -4,34 +4,28 @@
 
 @section('content')
 <!-- main content -->
-<div class="col-lg-10 col-md-9 order-1 order-md-2">
-    <div class="row">
-        <div class="col-lg-10 col-md-12">
+        <div class="col-lg-8 col-md-7 mb-30 order-2 order-md-2" style="text-align: justify;background: #fff;  border-radius: 5px;">
             <!-- Featured posts -->
             <article class="p-10  border-radius-10 mb-30 wow fadeIn animated">
-                <div class="row">
-                   
-                    <div class="col-md-12 col-lg-12">
-                        <div class="post-content">
-                            <h1 class="post-title mb-30">
-                               {{$pageContent->title}}
-                            </h1>
 
-                            <div class="entry-main-content">
-                                @if($pageContent->template=='default')
-                                 {!! $pageContent->description !!}
-                                @else
-                                @php $incl = $pageContent->template;@endphp
-                                 @include("templates.$incl")
-                                @endif
-                            </div>
-                        </div>
+                <div class="post-content">
+                    <h1 class="post-title mb-30">
+                        {{$pageContent->title}}
+                    </h1>
+
+                    <div class="entry-main-content">
+                        @if($pageContent->template=='default')
+                        {!! $pageContent->description !!}
+                        @else
+                        @php $incl = $pageContent->template;  @endphp
+                        @include("templates.$incl")
+                        @endif
                     </div>
                 </div>
-            </article>
 
+            </article>
         </div>
-        <div class="col-lg-2  col-md-2 sidebar-right">
+        <div class="col-lg-2 col-md-2 order-3 order-md-3 sidebar-right">
             <!--Post aside style 1-->
             @foreach($rightWidgets as $widget)
             <div class="sidebar-widget widget_newsletter border-radius-10 bg-white mb-30" style="text-align:center">
@@ -45,9 +39,5 @@
             @endforeach
 
         </div>
-    </div>
-
-
-
-</div>
+ 
 @endsection

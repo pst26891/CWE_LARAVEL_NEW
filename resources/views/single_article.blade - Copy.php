@@ -4,10 +4,10 @@
 
 @section('content')
 @php $vurl = "vol".$article->volumeInfo->alias."no".$article->issue->alias; @endphp
-<div class="col-lg-8 col-md-7 mb-30 order-2 order-md-2" style="text-align: justify;background: #fff;  border-radius: 5px;">
+<div class="col-lg-8 col-md-7 order-2 order-md-2" style="text-align: justify;">
 
-    <div class="entry-header entry-header-1 mb-30 mt-20">
-        <div class="entry-meta meta-0 font-small mb-30"><a href="#"><span class="post-cat bg-success color-white">{{$article->volumeInfo->name}} - {{$article->issue->name}}</span></a></div>
+    <div class="entry-header entry-header-1 mb-30 mt-50">
+        <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span class="post-cat bg-success color-white">{{$article->volumeInfo->name}} & {{$article->issue->name}}</span></a></div>
         <h3 class="post-title mb-30">
             {!! str_replace(['<p>', '</p>'], '', $article->title) !!}
         </h3>
@@ -87,6 +87,16 @@
             <p><span><strong>Keywords</strong> {{$article->keyword}}</span></p>
             @endif
 
+            <blockquote class="wp-block-quote is-style-large">
+                <p style="font-size: 14px;"><strong>Copy the following to cite this article:</strong><br>{!! $article->article_citation !!}</p>
+                @if ($article->doi != '')
+                <span> DOI:<a href="http://dx.doi.org/{{$article->doi}}" target="_blank">http://dx.doi.org/{{$article->doi}}</a>
+                </span> @endif
+            </blockquote>
+
+            <blockquote class="wp-block-quote is-style-large">
+                <p style="font-size: 14px;"><strong>Copy the following to cite this URL:</strong><br>{!! $article->url_citation !!}</p>
+            </blockquote>
         </div>
         <hr />
         <div class="article-section">
@@ -94,6 +104,7 @@
             <div class="tabs">
                 <div class="tab " onclick="showTab('download')">Pdf Download</div>
                 <div class="tab" onclick="showTab('citation')">Citation Manager</div>
+                <div class="tab active" onclick="showTab('history')">Publishing History</div>
             </div>
 
             <!-- Download Tab -->
@@ -101,17 +112,10 @@
                 <p><strong>Copy the following to cite this URL:</strong></p>
                 <p>https://yourjournal.com/article/xyz123</p>
 
-                @if($article->pdf_locate && $article->upload_pdf)
-                <a href="{{url('pdf').'/'.$article->pdf_locate.'/'.$article->upload_pdf}}"
-                    style="color:#000 !important"
-                    class="btn btn-default download-btn"
-                    data-article-id="{{ $article->id }}"
-                    title="Download"
-                    target="_blank">
-                    Download article (pdf)  <i class="fa fa-file-pdf-o fa-2x red_star"></i> <br>
-                   
+                <a class="btn-download" href="#" target="_blank" onclick="alert('Download counter called')">
+                    Download Article (PDF)<br>
+                    <i class="fa fa-file-pdf-o fa-lg red-icon"></i>
                 </a>
-                @endif
             </div>
 
             <!-- Citation Tab -->
@@ -145,7 +149,51 @@
                 </table>
             </div>
 
-
+            <!-- History Tab -->
+            <div id="history" class="tab-content active">
+                <p><strong>Article Publishing History</strong></p>
+                <table class="table-history">
+                    <tr>
+                        <th>Received:</th>
+                        <td>2024-12-01</td>
+                    </tr>
+                    <tr>
+                        <th>Accepted:</th>
+                        <td>2025-01-10</td>
+                    </tr>
+                    <tr>
+                        <th>Plagiarism Check:</th>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <th>Reviewed by:</th>
+                        <td>
+                            <a href="mailto:reviewer1@example.com">Dr. Reviewer One</a><br>
+                            <a href="https://orcid.org/0000-0001-2345-6789" target="_blank">
+                                <img src="images/orcid_16x16.png" alt="Orcid" />
+                            </a>
+                            <a href="https://publons.com/author/123456" target="_blank">
+                                <img src="images/publons.png" style="width:16px;" alt="Publons" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Second Review by:</th>
+                        <td>
+                            <a href="mailto:reviewer2@example.com">Prof. Reviewer Two</a><br>
+                            <a href="https://orcid.org/0000-0009-8765-4321" target="_blank">
+                                <img src="images/orcid_16x16.png" alt="Orcid" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Final Approval by:</th>
+                        <td>
+                            <a href="https://yourjournal.com/editor-in-chief" target="_blank">Editor-in-Chief</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div> <!-- End Other -->
 
@@ -159,154 +207,43 @@
 
     <div class="myrow">
         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.
-    </div>
 
+    </div>
 </div>
-<div class="col-lg-2 col-md-2 order-3 order-md-3">
+<div class="col-lg-2 col-md-2 order-3 order-md-3 sticky-sidebar">
+    <div class="sidebar-icons">
 
-    <div class="article-sidebar">
-
-        <h3 class="sidebar-heading">Article Metrics</h3>
-
-        <!-- PlumX -->
-        <div class="sidebar-card plum-card">
-
-            <div class="metric-title">
-                <span>PlumX:</span>
-            </div>
-
-            <a href="https://plu.mx/plum/a/?doi={{ $article->doi }}"
-                class="plumx-plum-print-popup"
-                data-site="plum"
-                data-popup="left"
-                data-size="large"
-                data-hide-when-empty="true">
-            </a>
-
+        <div class="icon-box" onclick="openSharePopup('Plum')">
+            ` <img src="{{ url('/')}}/assets/imgs/plum.png" alt="Plum Icon" class="icon-img">
+            <div class="icon-label">Plum</div>
         </div>
 
-        <!-- Views -->
-        <div class="metric-row">
-            <div class="metric-left">
-                <img src="{{ url('/') }}/assets/imgs/icon_views.png">
-                <span>Views:</span>
-            </div>
-            <strong>{{ $article->view ?? 0 }}</strong>
+        <div class="icon-box" onclick="openSharePopup('Share')">
+            <img src="{{ url('/')}}/assets/imgs/share.png" alt="Share Icon" class="icon-img">
+            <div class="icon-label">Share</div>
         </div>
 
-        <!-- Downloads -->
-        <div class="metric-row">
-            <div class="metric-left">
-                <img src="{{ url('/') }}/assets/imgs/icon_pdf_downloado.png">
-                <span>PDF Downloads:</span>
-            </div>
-            <strong>{{ $article->download ?? 0 }}</strong>
+        <div class="icon-box" onclick="openSharePopup('View')">
+            <img src="{{ url('/')}}/assets/imgs/views.png" alt="View Icon" class="icon-img">
+            <div class="icon-label">View</div>
         </div>
 
-        <h3 class="sidebar-heading">Citations</h3>
-
-        <div class="sidebar-card">
-
-            @php
-            $authors = [];
-            foreach ($article->author as $author) {
-            $authors[] = trim($author->f_name.' '.$author->m_name.' '.$author->l_name);
-            }
-            $author_query = implode('&author=', $authors);
-            @endphp
-
-            <a href="https://scholar.google.com/scholar_lookup?author={{ $author_query }}&title={{ urlencode(strip_tags($article->title)) }}"
-                target="_blank"
-                class="citation-link">
-
-                <img src="{{ url('/') }}/assets/imgs/Google_Scholar_logo.png" alt="Google Scholar">
-
-            </a>
-
+        <div class="icon-box" onclick="openSharePopup('Download')">
+            <img src="{{ url('/')}}/assets/imgs/downloads.png" alt="Download Icon" class="icon-img">
+            <div class="icon-label">Download</div>
         </div>
 
-        <h3 class="sidebar-heading">Publishing History</h3>
-
-        <div class="sidebar-card">
-            @if ($article->recieved != '')
-            <div class="history-row">
-                <span><strong>Received:</strong> </span>
-                {{ \Carbon\Carbon::parse($article->recieved)->format('d M Y') }}
-            </div>
-            @endif
-            @if ($article->accepted != '')
-            <div class="history-row">
-                <span><strong>Accepted:</strong> </span>
-                {{ \Carbon\Carbon::parse($article->accepted)->format('d M Y') }}
-            </div>
-            @endif
-            @if($article->plagrism_check_date != '')
-            <div class="history-row">
-                <span><strong>Plagiarism Check:</strong> </span>
-                {{ \Carbon\Carbon::parse($article->plagrism_check_date)->format('d M Y') }}
-            </div>
-            @endif
-
+        <div class="icon-box" onclick="openSharePopup('Cite')">
+            <img src="{{ url('/')}}/assets/imgs/cite.png" alt="Cite Icon" class="icon-img">
+            <div class="icon-label">Cite</div>
         </div>
 
-        <h3 class="sidebar-heading">Review Details</h3>
-
-        <div class="sidebar-card" style="padding: 5px;">
-            @if ($article->first_reviewer != '')
-            <div class="history-row">
-                <span><strong>Reviewed by: </strong> </span>
-                
-                    <a href="mailto:{{$article->first_rev_email}}">{{$article->first_reviewer}}</a>
-                    <a href="https://orcid.org/{{$article->first_rev_orcid_id}}" target="_blank"> <img src="{{url('assets/imgs/orcid_16x16.png')}}" alt="Orcid" /></a>
-            </div>
-            @endif
-            @if ($article->second_reviewer != '')
-            <div class="history-row">
-                <span><strong>Second Review:</strong> </span>
-                <a href="mailto:{{$article->sec_rev_email}}">{{$article->second_reviewer}}</a>
-                    <a href="https://orcid.org/{{$article->sec_rev_orcid_id}}" target="_blank"> <img src="{{url('assets/imgs/orcid_16x16.png')}}" alt="Orcid" /></a>
-                
-            </div>
-            @endif
-            @if ($article->final_approval_by != '')
-            <div class="history-row">
-                <span><strong>Final Approval:</strong> </span>
-                {{ $article->final_approval_by }}
-            </div>
-            @endif
-
-        </div>
-
-        <h3 class="sidebar-heading">Cite this article Cite</h3>
-        <div class="sidebar-icons sidebar-card">
-
-            <div class="icon-box" onclick="openSharePopup('Cite')">
-                <img src="{{ url('/')}}/assets/imgs/cite.png" alt="Cite Icon" class="icon-img">
-                <div class="icon-label">Cite</div>
-            </div>
-
-            <div class="icon-box" onclick="openSharePopup('Help')">
-                <img src="{{ url('/')}}/assets/imgs/help.png" alt="Help Icon" class="icon-img">
-                <div class="icon-label">Help</div>
-            </div>`
-
-        </div>
-
-        @foreach($rightWidgets as $widget)
-        <h3 class="sidebar-heading">{{strtolower($widget->name)}}</h3>
-        <div class="sidebar-card sidebar-widget widget_newsletter border-radius-10 bg-white mb-30" style="text-align:center">
-
-            <div class="newsletter">
-                {!! $widget->description !!}
-            </div>
-        </div>
-        @endforeach
+        <div class="icon-box" onclick="openSharePopup('Help')">
+            <img src="{{ url('/')}}/assets/imgs/help.png" alt="Help Icon" class="icon-img">
+            <div class="icon-label">Help</div>
+        </div>`
 
     </div>
-
-
-
-
 
 </div>
 
@@ -334,6 +271,31 @@
         const contentArea = document.getElementById("modalContentArea");
         let html = "";
         switch (type) {
+            case "Share":
+                html = `
+                <h2>Share Link</h2>
+                <div class="social-icons">
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                    <a href="#"><i class="fas fa-times-circle"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-reddit-alien"></i></a>
+                    <a href="#"><i class="fas fa-user"></i></a>
+                </div>
+                <div style="margin-top:15px;">
+                    <input type="text" value="{{url('/').'/'.$vurl.'/'.$article->url}}" id="shareLink" readonly style="width:70%; padding:8px;">
+                    <button onclick="copyShareLink()">Copy</button>
+                </div>
+            `;
+                break;
+            case "View":
+                html = `<h2>View Content</h2><p>Total View: <strong>{{$article->view}}</strong></p>`;
+                break;
+            case "Download":
+                html = `<h2>Download File</h2><a href="/path/to/file.pdf" download class="btn">Click here to download</a><br>
+                Total Download: <strong>{{$article->view}}</strong>`;
+                break;
             case "Help":
                 html = `
         <div class="help-popup">
@@ -359,16 +321,7 @@
     `;
                 break;
             case "Cite":
-                html = ` <blockquote class="wp-block-quote is-style-large">
-                <p style="font-size: 14px;"><strong>Copy the following to cite this article:</strong><br>{!! $article->article_citation !!}</p>
-                @if ($article->doi != '')
-                <span> DOI:<a href="http://dx.doi.org/{{$article->doi}}" target="_blank">http://dx.doi.org/{{$article->doi}}</a>
-                </span> @endif
-            </blockquote>
-
-            <blockquote class="wp-block-quote is-style-large">
-                <p style="font-size: 14px;"><strong>Copy the following to cite this URL:</strong><br>{!! $article->url_citation !!}</p>
-            </blockquote>`;
+                html = `<h2>How to Cite</h2><p>Author, Title, Journal, Year. DOI: <strong>10.xxxx/xxxx</strong></p>`;
                 break;
             default:
                 html = `<p>Unknown action.</p>`;

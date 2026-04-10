@@ -25,7 +25,7 @@
                                     @foreach($mostDownloaded as $article)
                                     @php $vurl = "vol".$article->volumeInfo->alias."no".$article->issue->alias; @endphp
 
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
+                                    <article class="p-20 background-white border-radius-10 mb-30 wow fadeIn animated">
                                         <div class="d-flex">
 
                                             <div class="post-content media-body">
@@ -50,7 +50,7 @@
                                                     <span class="post-by"><i class="ti-user mr-5"></i>
                                                         <a href="#">
                                                             @foreach($article->author as $index => $ath)
-                                                            <a href="#">{{ $ath->f_name . ' ' . $ath->l_name }}</a>@if(!$loop->last), @endif
+                                                            <a href="#">{{ $ath->f_name . ' ' . $ath->l_name }}</a> <a href="https://orcid.org/{{$ath->orcid_id}}" target="_blank"> <img src="{{url('assets/imgs/orcid_16x16.png')}}" alt="Orcid" /></a> @if(!$loop->last) , @endif
                                                             @endforeach
                                                         </a></span>
                                                     <span class="post-on"><i class="ti-calendar mr-5"></i>{{ \Carbon\Carbon::parse($article->pub_date_o)->format('d M Y') }}</span>

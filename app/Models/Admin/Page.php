@@ -22,6 +22,7 @@ class Page extends Model
         'title',
         'description',
         'status',
+        'icons',
         'position',
         'meta_title',
         'meta_keyword',

@@ -20,7 +20,6 @@ class MenuController extends MyController
 
     $desiredMenu = $this->getDesiredMenu();
     $MenuItems = $this->getMenuItems($desiredMenu);
-
     $data['categories'] = Page::all();
     $data['desiredMenu'] = $desiredMenu;
     $data['MenuItems'] = $MenuItems;
@@ -261,29 +260,38 @@ class MenuController extends MyController
   }
 
   public function deleteMenuItem($id, $key, $in = '')
-  {
-   
-    $MenuItem = MenuItem::findOrFail($id);
+{
+  
+    $MenuItem = MenuItem::find($id);
+
+    if (!$MenuItem) {
+        return redirect()->back()->with('error', 'Menu item not found.');
+    }
+
     $menu = Menu::findOrFail($MenuItem->menu_id);
- 
+
     if (!empty($menu->content)) {
-      $data = json_decode($menu->content, true);
-      if (isset($data[0][$key])) {
-        if ($in === '') {
-          unset($data[0][$key]);
-        } elseif ($in === 'children') {
-          unset($data[0][$key]['children'][0][$in]);
-        } else {
-          unset($data[0][$key]['children'][0][$in]);
+        $data = json_decode($menu->content, true);
+
+        if (isset($data[0][$key])) {
+
+            if ($in === '') {
+                unset($data[0][$key]);
+            } else {
+                unset($data[0][$key]['children'][0][$in]);
+            }
+
+            $menu->update([
+                'content' => json_encode($data)
+            ]);
         }
-        $menu->update(['content' => json_encode($data)]);
-      }
     }
 
     $MenuItem->delete();
-    return redirect('admin/manage-menus')->with('success', 'Menu item deleted successfully');
 
-  }
+    return redirect('admin/manage-menus?id=' . $menu->id)
+        ->with('success', 'Menu item deleted successfully');
+}
 
   public function destroy(Request $request)
   {

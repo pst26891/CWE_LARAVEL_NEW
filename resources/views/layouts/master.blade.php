@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ url('/')}}/assets/css/widgets.css">
     <link rel="stylesheet" href="{{ url('/')}}/assets/css/color.css">
     <link rel="stylesheet" href="{{ url('/')}}/assets/css/responsive.css">
+    <script src="https://cdn.plu.mx/widget-popup.js"></script>
+
 </head>
 
 <body>

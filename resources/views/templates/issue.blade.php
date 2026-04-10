@@ -53,7 +53,7 @@
                 </div>
                 <div class="post-content media-body">
                     <div class="entry-meta mb-15 mt-10">
-                        <span class="post-in text-danger font-x-large">{{ $volumeName }} | {{ $numberName }}</span>
+                        <span class="post-in text-success font-x-large">{{ $volumeName }} | {{ $numberName }}</span>
                         <span class="post-by float-right">
                             <a href="{{ url("feed.php/$volumeAlias/$numberAlias") }}" target="_blank">
                                 <img src="{{ url('assets/imgs/icon_rss.jpg') }}" /> RSS
@@ -81,7 +81,7 @@
             <p><a href="{{ url('page/submission/reviewers-list/') }}">Visit Reviewers List</a></p>
         @endif
 
-        <h2 class="myheading">Research Articles</h2>
+        <h2 class="myheading">Published Articles</h2>
         <div class="border_heading mb-3"></div>
 
             @php
@@ -100,29 +100,33 @@
 
                 @if($articles->isNotEmpty())
                      <div class="entry-meta mb-15 mt-10">
-                       <span class="post-in text-danger font-x-large">{{ $articleType->issue_name }}</span>
+                        <h3 class="bg-green-solid">{{ $articleType->issue_name }}</h3>
+
                      </div>
 
                     @foreach($articles as $article)
                         @php
                             $volumeUrl = "vol$volumeAlias" . "no$numberAlias";
+                            $vurl = "vol".$article->volumeInfo->alias."no".$article->issue->alias; 
                         @endphp
 
-                        <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
+                        <article class="article-list background-white border-radius-10 wow fadeIn animated">
                             <div class="d-flex">
-                                <div class="post-content media-body">
+                                <div class="post-content media-body article-item">
                                 
-                                    <h5 class="post-title mb-15 text-limit-2-row">
-                                        <a href="">{{ strip_tags($article->title) }}</a>
+                                    <h5 class="post-title mb-15 text-limit-2-row text-success article-title">
+                                        <a href="{{url('/').'/'.$vurl.'/'.$article->url}}">
+                                        {!! strip_tags($article->title) !!}
+                                    </a>
                                     </h5>
 
-                                    <p class="post-exerpt font-medium text-muted d-none d-lg-block mb-10">
-                                        [ <a href="{{ url("$volumeUrl/$article->url") }}">HTML Full Text</a> ]
-                                        [ <a href="{{ url('abstract/' . $article->id) }}">Abstract</a> ]
+                                    <p class="post-exerpt font-medium text-danger article-links d-none d-lg-block mb-10">
+                                        <a href="{{ url("$volumeUrl/$article->url") }}">HTML Full Text</a>
+                                       <a href="{{ url('abstract/' . $article->id) }}">Abstract</a> 
                                         @if($article->upload_pdf)
-                                            [ <a href="{{ url("pdf/{$article->pdf_locate}/{$article->upload_pdf}") }}" target="_blank" onclick="count_download('{{ $article->manuscript_no }}')">PDF</a> ]
+                                         <a href="{{ url("pdf/{$article->pdf_locate}/{$article->upload_pdf}") }}" target="_blank" onclick="count_download('{{ $article->manuscript_no }}')">PDF</a> 
                                         @endif
-                                        [ <a href="{{ url("xml/$volumeUrl/$article->url") }}" target="_blank">XML</a> ]
+                                         <a href="{{ url("xml/$volumeUrl/$article->url") }}" target="_blank">XML</a>
                                     </p>
 
                                     @if($article->doi)
@@ -131,10 +135,10 @@
                                         </p>
                                     @endif
 
-                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                    <div class="article-meta entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                         <span class="post-by"><i class="ti-user mr-5"></i>
                                             @foreach($article->author as $author)
-                                                <a href="#">{{ $author->f_name }} {{ $author->l_name }}</a>@if(!$loop->last), @endif
+                                                <a href="#">{{ $author->f_name }} {{ $author->l_name }}</a> <a href="https://orcid.org/{{$author->orcid_id}}" target="_blank"> <img src="{{url('assets/imgs/orcid_16x16.png')}}" alt="Orcid" /></a> @if(!$loop->last) , @endif
                                             @endforeach
                                         </span>
                                         <span class="post-on"><i class="ti-calendar mr-5"></i>{{ \Carbon\Carbon::parse($article->pub_date_o)->format('d M Y') }}</span>

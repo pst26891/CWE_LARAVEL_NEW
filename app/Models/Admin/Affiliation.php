@@ -9,7 +9,7 @@ class Affiliation extends Model
 {
     use HasFactory;
 
-    protected $table = 'affiliations'; // Keeping the table name as in the database
+    protected $table = 'affliations'; // Keeping the table name as in the database
 
     protected $fillable = [
         'article_id',

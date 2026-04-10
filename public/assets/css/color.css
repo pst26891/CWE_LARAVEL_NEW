@@ -29,8 +29,8 @@ a.active,
 .widget_pages li a:hover,
 .main-header .main-nav ul li.current-menu-item > a,
 .sidebar-right .post-title:hover a,
-.main-header .main-nav ul li:hover > a{color:#f2546a;}
-a.text-muted:hover{color:#f2546a!important;}
+.main-header .main-nav ul li:hover > a{color:#057203;}
+a.text-muted:hover{color:#057203!important;}
 h1,
 h2,
 h3,
@@ -54,14 +54,14 @@ h6{color:#212d45;}
 .blog_right_sidebar .search_widget .input-group button,
 .main-header .main-nav ul li.current-menu-item > a::after,
 .pagination-area .page-item.active .page-link,
-.main-header .main-nav ul li:hover > a::after{background:#f2546a;}
+.main-header .main-nav ul li:hover > a::after{background:#057203;}
 
 /*Border*/
 .main-header .main-menu ul ul.sub-menu,
 .boxed-btn,
 .boxed-btn:hover,
 .slick-dots li.slick-active button,
-.featured-slider-2-nav .slick-active img{border-color:#f2546a;}
+.featured-slider-2-nav .slick-active img{border-color:#057203;}
 .border-color-1{border-color:#ececec;}
 
 /*Secondary color*/
@@ -120,7 +120,7 @@ button.subscribe:hover{background:#1d55c1;color:#fff;}
 /*Custom bootstrap color*/
 .text-primary{color:#3FA9F5!important;}
 .text-secondary{color:#6c757d!important;}
-.text-success{color:#72b572!important;}
+.text-success{color:#057203!important;}
 .text-danger{color:#d35353!important;}
 .text-warning{color:#e0c244!important;}
 .text-info{color:#57c0dd!important;}

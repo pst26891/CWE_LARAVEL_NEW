@@ -13,12 +13,11 @@ return new class extends Migration {
     {
         Schema::create('article_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('issue_name', 255);
-            $table->tinyInteger('status')->default(0)->comment('0: Active, 1: Inactive');
+            $table->string('name', 150);
+            $table->string('issue_name', 150);
+            $table->boolean('status')->default(1);
             $table->integer('sorder')->default(0);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->index(['status', 'sorder']);
         });
 
         // Insert Default Data
